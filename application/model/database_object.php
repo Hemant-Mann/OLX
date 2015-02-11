@@ -26,6 +26,14 @@ class DatabaseObject {
 	  	return !empty($result_array) ? $result_array : false;
  	}
 
+ 	public static function find_by_field($field, $value) {
+ 		global $database;
+ 		$safe_value = $database->escape_value($id);
+ 		$result_array = static::find_by_sql("SELECT * FROM ". static::$table_name. 
+	    	" WHERE {$field}='{$safe_value}'");
+ 		return !empty($result_array) ? $result_array : false;
+ 	}
+ 	
 	public static function find_by_username($username="") {
 		global $database;
 		$safe_username = $database->escape_value($username);
