@@ -123,37 +123,25 @@ class User extends DatabaseObject {
 			global $database;
 
 			// Check if the phone number exists in the DB
-			$safe_phone = $database->escape_value($this->phone);
-			$sql = "SELECT * FROM users ";
-			$sql .= "WHERE phone = '{$safe_phone}' ";
-			$result_set = self::find_by_sql($sql);
-			$user = array_shift($result_set);
-			if(!empty($user)) {
-				if($user->phone === $safe_phone) {
+			if($result_set = self::find_by_field("phone", $this->phone)) {
+				$user = array_shift($result_set);
+				if($user->phone === $this->phone) {
 					$this->errors[] = "Please enter a different phone number";
 				}
 			}
 
 			// Check if the email already exists in the database;
-			$safe_email = $database->escape_value($this->email);
-			$sql = "SELECT * FROM users ";
-			$sql .= "WHERE email = '{$safe_email}' ";
-			$result_set = self::find_by_sql($sql);
-			$user = array_shift($result_set);
-			if(!empty($user)) {
-				if($user->email === $safe_email) {
+			if($result_set = self::find_by_field("email", $this->email)) {
+				$user = array_shift($result_set);
+				if($user->email === $this->email) {
 					$this->errors[] = "Please try with a different email id";
 				}
 			}
 
 			// Check if the username already exists in the database;
-			$safe_username = $database->escape_value($this->username);
-			$sql = "SELECT * FROM users";
-			$sql .= " WHERE username = '{$safe_username}' ";
-			$result_set = self::find_by_sql($sql);
-			$user = array_shift($result_set);
-			if(!empty($user)) {
-				if($user->username === $safe_username) {
+			if($result_set = self::find_by_field("username", $this->username)) {
+				$user = array_shift($result_set);
+				if($user->username === $this->username) {
 					$this->errors[] = "Please try with a different username";
 				}
 			}

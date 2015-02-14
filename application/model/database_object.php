@@ -28,7 +28,7 @@ class DatabaseObject {
 
  	public static function find_by_field($field, $value) {
  		global $database;
- 		$safe_value = $database->escape_value($id);
+ 		$safe_value = $database->escape_value($value);
  		$result_array = static::find_by_sql("SELECT * FROM ". static::$table_name. 
 	    	" WHERE {$field}='{$safe_value}'");
  		return !empty($result_array) ? $result_array : false;
