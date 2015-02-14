@@ -22,7 +22,7 @@
   	<?php } ?>
 
   <div id="pagination" style="clear: both;">
-    <?php echo pagination_links($pagination, "home", $page);    ?>
+    <?php echo pagination_links($pagination, "home", $page);   ?>
     </div>
   </div>
   <!-- Showing search results -->

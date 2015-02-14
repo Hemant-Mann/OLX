@@ -7,11 +7,8 @@
   // 2. records per page ($per_page)
   $per_page = 7;
   
-  $sql  = "SELECT * FROM products ";
-  $sql .= "WHERE user_id =".$_SESSION['user_id']." ";
-  
   // 3. Find the total count of ads/photos/products
-  $ads = Product::find_by_sql($sql);
+  $ads = Product::find_by_field("user_id", $_SESSION['user_id']);
   $total_count = 0;
   foreach($ads as $ad) {
     $total_count++;
@@ -19,9 +16,7 @@
 
   $pagination = new Pagination($page, $per_page, $total_count);
 
-  $sql .= "LIMIT {$per_page} ";
-  $sql .= "OFFSET {$pagination->offset()}";
-  $products = Product::find_by_sql($sql);
+  $products = Product::find_by_field("user_id", $_SESSION['user_id'], ["limit" => $per_page, "offset" => $pagination->offset()]);
   
   include('../view/admin/dashboard.php');
 ?>

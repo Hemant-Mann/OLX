@@ -9,18 +9,9 @@
   // 3. total record count ($total_count)
   $total_count = Product::count_all();
 
-  // Find all the photos
-  // instead of using this $photos = Photograph::find_all();
-  // use pagination instead
-
   $pagination = new Pagination($page, $per_page, $total_count);
 
-  // Instead of finding all records, just find the recoreds
-  // for this page
-  $sql  = "SELECT * FROM products ";
-  $sql .= "LIMIT {$per_page} ";
-  $sql .= "OFFSET {$pagination->offset()}";
-  $products = Product::find_by_sql($sql);
+  $products = Product::find_all(["limit" => $per_page, "offset" => $pagination->offset()]);
   
   include('../view/index.php');
 

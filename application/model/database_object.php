@@ -7,8 +7,17 @@ class DatabaseObject {
 
 	protected static $table_name;
 
-	public static function find_all() {
-		return static::find_by_sql("SELECT * FROM ". static::$table_name);
+	// to limit the result pass limit and offset in an associative array
+	public static function find_all($extra = array()) {
+		$sql = "SELECT * FROM ". static::$table_name;
+
+		if(!empty($extra)) {
+			extract($extra);
+	    	$sql .= " LIMIT {$limit}";
+  			$sql .= " OFFSET {$offset}";
+		}
+
+		return static::find_by_sql($sql);
   	}
   
     public static function find_by_id($id=0) {
@@ -17,33 +26,26 @@ class DatabaseObject {
 	    	" WHERE id=". $database->escape_value($id)." LIMIT 1");
 	  return !empty($result_array) ? array_shift($result_array) : false;
  	}
-  
-    public static function find_by_user_id($id=0) {
-    	global $database;
-	    $result_array = static::find_by_sql("SELECT * FROM ". static::$table_name. 
-	    	" WHERE user_id=". $database->escape_value($id));
-
-	  	return !empty($result_array) ? $result_array : false;
- 	}
-
- 	public static function find_by_field($field, $value) {
+  	
+  	// Pass in the field you want to query for and with the value
+  	// If you want to limit the result then 
+  	// pass limit and offset in form of an associative array
+ 	public static function find_by_field($field, $value, $extra = array()) {
  		global $database;
  		$safe_value = $database->escape_value($value);
- 		$result_array = static::find_by_sql("SELECT * FROM ". static::$table_name. 
-	    	" WHERE {$field}='{$safe_value}'");
+ 		$sql = "SELECT * FROM ". static::$table_name; 
+	    $sql .=	" WHERE {$field}='{$safe_value}'";
+
+	    if(!empty($extra)) {
+	    	extract($extra);
+	    	$sql .= " LIMIT {$limit}";
+  			$sql .= " OFFSET {$offset}";
+	    }
+
+ 		$result_array = static::find_by_sql($sql);
  		return !empty($result_array) ? $result_array : false;
  	}
  	
-	public static function find_by_username($username="") {
-		global $database;
-		$safe_username = $database->escape_value($username);
-		$sql = "SELECT * FROM ". static::$table_name;
-		$sql .= " WHERE username = '{$safe_username}'";
-		$result = static::find_by_sql($sql);
-
-		return !empty($result) ? array_shift($result) : false;
-	} 	
-
   	public static function find_by_sql($sql="") {
 	    global $database;
 	    $result_set = $database->query($sql);
