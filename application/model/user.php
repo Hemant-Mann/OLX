@@ -27,7 +27,11 @@ class User extends DatabaseObject {
 
 	public static function authenticate($username="", $password="") {
 	    global $database;
-	    $user = self::find_by_username($username);
+	    if($result_set = self::find_by_field("username",$username)) {
+			$user = array_shift($result_set);
+		} else {
+			$user = false;
+		}
 	    $password = $database->escape_value($password);
 
 		if($user) {
