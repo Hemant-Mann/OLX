@@ -10,13 +10,17 @@
   // 3. Find the total count of ads/photos/products
   $ads = Product::find_by_field("user_id", $_SESSION['user_id']);
   $total_count = 0;
-  foreach($ads as $ad) {
-    $total_count++;
+  if($ads) {
+    foreach($ads as $ad) {
+      $total_count++;
+    }
+  } else {
+    $ads = [];
   }
 
   $pagination = new Pagination($page, $per_page, $total_count);
 
   $products = Product::find_by_field("user_id", $_SESSION['user_id'], ["limit" => $per_page, "offset" => $pagination->offset()]);
-  
+  if(!$products) { $products = []; }
   include('../view/admin/dashboard.php');
 ?>
