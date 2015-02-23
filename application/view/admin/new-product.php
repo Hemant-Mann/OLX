@@ -18,7 +18,7 @@
 			<form id="newProductForm" action="<?php echo HOME; ?>new-product" enctype="multipart/form-data" method="POST">
 				<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>" />
 				<p>Category:<br /> 
-					<input type="radio" name="category" value="Vehicles" /> Vehicles<br />	
+					<input type="radio" name="category" value="Vehicles" checked /> Vehicles<br />	
 					<input type="radio" name="category" value="Electronics and Computer" /> Electronics and Computer<br />
 					<input type="radio" name="category" value="Mobiles and Tablets" /> Mobiles and Tablet<br />
 					<input type="radio" name="category" value="Clothing and Accessories" /> Clothing and Accessories<br />
@@ -27,12 +27,12 @@
 					<input type="radio" name="category" value="Other"> Other
 				</p>
 				
-				<p>Name: <input id="productName" class="form-control" type="text" name="name" value="<?php echo $name; ?>" />	
-				<p>Price: <input id="productPrice" class="form-control" type="text" name="price" value="<?php echo $price; ?>" />	(In Rs.)</p>
+				<p>Name: <input id="productName" class="form-control" type="text" required name="name" value="<?php echo $name; ?>" />	
+				<p>Price: <input id="productPrice" class="form-control" type="text" required name="price" value="<?php echo $price; ?>" />	(In Rs.)</p>
 				<p>Purchase Year: <input id="purchaseYear" class="form-control" type="text" name="pur_year" value="<?php echo $pur_year; ?>" /></p>
 				Description: <br />
-				<p><textarea id="productDescription" class="form-control" name="description" cols=150 rows=20><?php echo $description; ?></textarea>				
-				<p>Photo: <input type="file" name="file_upload" /><br />
+				<p><textarea id="productDescription" class="form-control" required name="description" cols=150 rows=20><?php echo $description; ?></textarea>				
+				<p>Photo: <input type="file" name="file_upload" required /><br />
 				Max image size should be less than 5 MB.<br /></p>
 
 				<input class="btn btn-info" type="submit" name="submit" value="Upload" />
