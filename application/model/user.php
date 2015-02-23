@@ -15,6 +15,7 @@ class User extends DatabaseObject {
 	public $username;
 	public $password;
 
+	private $required_fields = ['first_name', 'last_name', 'phone', 'email', 'username', 'password'];
 	public $errors = [];
 
   	public function full_name() {
@@ -82,46 +83,29 @@ class User extends DatabaseObject {
 			//Can't save if there are pre-existing errors
 			if(!empty($this->errors)) { return false; }
 
-			// Make any field is not empty
-			if(empty($this->first_name)) {
-				$this->errors[] = "Please provide a first name";
-			} 
+			// Check if any required field is empty
+			foreach($this->required_fields as $field) {
+				if(empty($this->{$field})) {
+					$this->errors[] = "Please fill the required fields";
+					return false;
+				} else {
+					// Nothing is empty so check the lengths
+					if($field == 'phone') {
+						if(strlen($this->{$field}) != 10) {
+							$this->errors[] = "Please provide a 10 digit phone number";
+						}
+					} elseif($field == 'email') {
+						if(strlen($this->{$field}) > 255) {
+							$this->errors[] = "Email can only be 255 characters long";
+						}
+					} elseif($field == 'password') {
 
-			if(empty($this->last_name)) {
-				$this->errors[] = "Please provide a last name";
-			} 
-
-			if (empty($this->email)) {
-				$this->errors[] = "Please provide an email";
-			} 
-
-			if(empty($this->phone)) {
-				$this->errors[] = "Please provide phone number";
-			} 
-
-			if(empty($this->username)) {
-				$this->errors[] = "Please fill a username of your choice";
-			} 
-
-			if (empty($this->password)) {
-				$this->errors[] = "Please enter a password";
-			} 
-
-			// Check lengths
-			if(strlen($this->first_name) > 30) {
-				$this->errors[] = "The length of first name should be less than 30 characters";
-			} 
-
-			if(strlen($this->last_name) > 30) {
-				$this->errors[] = "Last name can only be 30 characters long";
-			} 
-
-			if(strlen($this->username) > 30) {
-				$this->errors[] = "Username can only be 30 characters long";
-			} 
-
-			if(strlen($this->phone) != 10) {
-				$this->errors[] = "Please provide a 10 digit phone number";
+					} else {
+						if(strlen($this->{$field}) > 30) {
+							$this->errors[] = "Max length of the {$field} is 30 characters";
+						}
+					}
+				}
 			} 
 
 			global $database;
@@ -161,9 +145,6 @@ class User extends DatabaseObject {
 		}
 	}  
 
-
 }
 	
-
-
 ?>

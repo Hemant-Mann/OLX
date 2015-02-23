@@ -14,6 +14,8 @@ class Product extends DatabaseObject {
 	public $filename;
 	public $file_size;
 	
+	// To be provided by the user input
+	private $required_fields = ['category', 'name', 'price', 'description'];
 	private $temp_path;
 	protected $upload_dir = "products";
 	public $errors = array();
@@ -60,32 +62,23 @@ class Product extends DatabaseObject {
 			//Can't save if there are pre-existing errors
 			if(!empty($this->errors)) { return false; }
 
-			// Make sure the category is not too long for the DB
-			if(strlen($this->category) > 30) {
-				$this->errors[] = "The category can only be 30 characters long";
-			} 
-			
-			// Make sure the category is given
-			if(empty($this->category)) {
-				$this->errors[] = "Please provide a category";
-			}
-
-			// Make sure a name is given to the product
-			if(empty($this->name)) {
-				$this->errors[] = "Please provide the product name reflecting its model";
-			} 
-			if(strlen($this->name) > 50) {
-				$this->errors[] = "Name can only be 50 characters long";
-			}
-
-			// Make sure the price is given
-			if(empty($this->price)) {
-				$this->errors[] = "Please give a price";
-			}
-
-			// Make sure the product has a description
-			if(empty($this->description)) {
-				$this->errors[] = "Please give atleast a small description";
+			// Check if any required field is empty
+			foreach($this->required_fields as $field) {
+				if(empty($this->{$field})) {
+					$this->errors[] = "Please fill the required fields";
+					return false;
+				} else {
+					// Nothing is empty so check the lengths
+					if($field == 'category') {
+						if(strlen($this->{$field}) > 30) {
+							$this->errors[] = "Category can only be 30 characters long";
+						}
+					} elseif($field == 'name') {
+						if(strlen($this->{$field}) > 50) {
+							$this->errors[] = "Name of product can be 50 characters long";
+						}
+					} 
+				}
 			}
 
 			// Can't save without filename and temp location
