@@ -27,7 +27,7 @@
 					<input type="radio" name="category" value="Other"> Other
 				</p>
 				
-				<p>Name: <input id="productName" class="form-control" type="text" required name="name" value="<?php echo $name; ?>" />	
+				<p>Name: <input id="productName" class="form-control" type="text" required maxlength="50" name="name" value="<?php echo $name; ?>" />	
 				<p>Price: <input id="productPrice" class="form-control" type="text" required name="price" value="<?php echo $price; ?>" />	(In Rs.)</p>
 				<p>Purchase Year: <input id="purchaseYear" class="form-control" type="text" name="pur_year" value="<?php echo $pur_year; ?>" /></p>
 				Description: <br />

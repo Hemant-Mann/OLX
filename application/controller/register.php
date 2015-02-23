@@ -30,6 +30,13 @@ if(isset($_POST['submit'])) {
 
 	if($user->save()) {
 		$message = "You are successfully registered!";
+		$first_name = "";
+		$last_name = "";
+		$email = "";
+		$phone = "";
+		$username = "";
+		$password = "";
+
 	} else {
 		$message = join("<br />", $user->errors);
 	}	
