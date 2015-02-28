@@ -13,6 +13,9 @@ defined('SITE_ROOT') ? null :
 defined('APPLICATION') ? null : define('APPLICATION', SITE_ROOT.DS.'application');
 defined('VIEW') ? null : define('VIEW', APPLICATION.DS.'view');
 
+// Root directory of domain 'localhost' is 'www'
+// Project is in the directory 'olx' 
+// hence HOME: /olx/
 define('HOME', '/'.'olx/');
 define('ASSETS', '/olx/assets/');
 define('STYLESHEETS', ASSETS.'stylesheets/');
