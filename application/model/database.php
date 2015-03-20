@@ -1,5 +1,5 @@
+<?php require_once $libpath = substr(str_replace('\\', '/', __dir__), 0, -17).'library/initialize.php'; ?>
 <?php
-require_once('../config/config.php');
 
 class MySQLDatabase {
 	

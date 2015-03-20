@@ -1,7 +1,4 @@
 <?php
-// If it's going to need the database, then it's 
-// probably smart to require it before we start.
-require_once('database.php');
 
 class User extends DatabaseObject {
 	
@@ -76,7 +73,7 @@ class User extends DatabaseObject {
 		// A new record won't have an id yet
 		if(isset($this->id)) {
 			// To update the description or price
-			$this->update();
+			return $this->update();
 		} else {
 			// Make sure there are no errors
 
@@ -136,8 +133,7 @@ class User extends DatabaseObject {
 
 			if(empty($this->errors)) {
 				// No errors create a user
-				$this->create();
-				return true;
+				return $this->create();
 			} else {
 				return false;
 			}

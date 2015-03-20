@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="<?php echo STYLESHEETS; ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo STYLESHEETS; ?>blueimp-gallery.min.css" rel="stylesheet">
+    <link href="<?php echo STYLESHEETS; ?>bootstrap-image-gallery.min.css" rel="stylesheet">
     <link href="<?php echo STYLESHEETS; ?>main.css" media="all" rel="stylesheet" type="text/css" />
     <script src="<?php echo JAVASCRIPTS; ?>respond.js"></script>  
   </head>

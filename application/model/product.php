@@ -1,5 +1,4 @@
 <?php
-require_once('database.php');
 
 class Product extends DatabaseObject {
 	protected static $table_name = "products";
@@ -55,7 +54,7 @@ class Product extends DatabaseObject {
 		// A new record won't have an id yet
 		if(isset($this->id)) {
 			// To update the description or price
-			$this->update();
+			return $this->update();
 		} else {
 			// Make sure there are no errors
 
@@ -87,7 +86,7 @@ class Product extends DatabaseObject {
 			}
 
 			//Determine the target_path
-			$target_path = SITE_ROOT.DS.'assets'.DS. $this->upload_dir .DS.
+			$target_path = SITE_ROOT.'assets'.DS. $this->upload_dir .DS.
 				$this->filename;
 
 			// Make sure a file doesn't already exist in the target location
@@ -123,7 +122,7 @@ class Product extends DatabaseObject {
 			// then remove the file
 			// Note that even though the database entry is gone, this object
 			// is still around (which lets us use $this->image_path())
-			$target_path = SITE_ROOT.DS.'assets'.DS.$this->image_path();
+			$target_path = SITE_ROOT.'assets'.DS.$this->image_path();
 			return unlink($target_path) ? true: false;
 		} else {
 			// database deletion failed.
@@ -134,8 +133,6 @@ class Product extends DatabaseObject {
 	public function image_path() {
 		return $this->upload_dir."/".$this->filename;
 	}
-
-
 }
 
 ?>
