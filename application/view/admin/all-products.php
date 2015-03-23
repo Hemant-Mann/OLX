@@ -17,26 +17,28 @@
     </form>
    
     <div id="display">
-      <?php foreach($products as $product) { ?>
-      <div class="col-xs-4">
-        <div class="thumbnail">
-          <p class="caption">
-            Category: <?php echo $product->category; ?><br/>
-            Product Name: <?php echo $product->name; ?><br />
-          </p>
-          <a href="<?php echo HOME; ?>view-product?id=<?php echo $product->id; ?>" class="img-responsive">
-            <img src="<?php echo ASSETS.$product->image_path(); ?>" width="200" height="200" />
-          </a>  
-        </div>
-      </div>
-      <?php } ?>
-
-      <div id="pagination" style="clear: both;">
-        <?php echo pagination_links($pagination, "all-products", $page);     ?>
+    <?php foreach($products as $product){ ?>
+     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-5">
+      <div>
+        <p>
+          <span class="visible-lg visible-md visible-sm"><b>Category:</b> <?php echo $product->category; ?><br/></span>
+          <span class="visible-lg visible-md visible-sm visible-xs"><b>Product:</b> <?php echo $product->name; ?><br /></span>
+        </p>
+    
+        <a class="thumbnail" href="<?php echo ASSETS.$product->image_path(); ?>" title="<?php echo $product->category. ': '.$product->name; ?>" data-gallery>
+          <img src="<?php echo ASSETS.$product->image_path(); ?>" width="210" alt="<?php echo $product->name; ?>" />
+        </a>  
       </div>
     </div>
-    <div id="search-results">
+    <?php } ?>
+    <div id="pagination" style="clear: both;">
+      <?php echo pagination_links($pagination, "all-products", $page);   ?>
+      </div>
     </div>
   </div>
+  <!-- Showing search results -->
+  <div id="search-results">
+  </div>
+  <?php include($dir_public.'lightbox.php'); ?>
 </div><!-- End Content Row -->
 <?php include_layout_template('admin_footer.php'); ?>	
