@@ -17,7 +17,7 @@
       <!--header row-->
       <div class="row">
         <nav class="navbar navbar-default navbar-fixed-top">
-          <h1>OLX<?php if(isset($_SESSION["user_id"])) { 
+          <h1><a href="<?php echo HOME.'home'; ?>" id="pageTop">OLX</a><?php if(isset($_SESSION["user_id"])) { 
           			$logged_user = User::find_by_id($_SESSION["user_id"]);
           			echo ": ".$logged_user->first_name;
           			unset($logged_user);
