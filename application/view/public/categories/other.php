@@ -1,16 +1,15 @@
 <?php include_layout_template('header.php', ["pageName" => "Other"]); ?>
 <div class="col-lg-9 col-sm-7">
 	<h2>Different Type of Products: </h2>
-
 	<?php foreach($products as $product) { ?>
-	<div class="col-xs-5">
-		<div class="thumbnail">
-			<p class="caption">Item: <b><?php echo $product->name; ?><br /></b></p>
-		    <a href="<?php echo HOME; ?>view-product?other=<?php echo $product->id; ?>">
-			    <img src="<?php echo ASSETS ."". $product->image_path(); ?>" width="200" class="img-responsive" />
-			</a>
-		</div>
-	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-5">
+  		<div>
+        <p><?php echo $product->name; ?><br /></p>
+		<a class="thumbnail" href="<?php echo HOME; ?>view-product?other=<?php echo $product->id; ?>">
+ 			<img src="<?php echo ASSETS.$product->image_path(); ?>" width="210" alt="<?php echo $product->name; ?>" />
+		</a>	
+  		</div>
+    </div>
 	<?php } ?>
 </div>
 </div>
