@@ -16,6 +16,7 @@ require_once(MODEL.'database_object.php');
 // load database related classes
 require_once(MODEL.'product.php');
 require_once(MODEL.'user.php');
+require_once(MODEL.'categories.php');
 
 require_once(MODEL.'pagination.php');
 ?>

@@ -23,6 +23,29 @@
     }
   }
 
+  // Return category name if id is provided
+  // else return category id if name is provided
+  function category_details($id="", $value="") {
+    global $categories;
+
+    if(!empty($value)) {
+      foreach ($categories as $cat) {
+        if($cat["value"] === $value) {
+          return $cat["id"];
+        }
+      }
+    }
+    
+    if(!empty($id)) {
+       foreach ($categories as $cat) {
+        if($cat["id"] == $id) {
+          return $cat["value"];
+        }
+      }
+    } 
+  }
+
+
   function __autoload($class_name) {
   	$class_name = strtolower($class_name);
     $path = MODEL."{$class_name}.php";
