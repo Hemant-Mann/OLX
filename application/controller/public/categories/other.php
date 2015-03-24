@@ -1,4 +1,4 @@
-<?php require_once $libpath = substr(str_replace('\\', '/', __dir__), 0, -22).'library/initialize.php'; ?>
+<?php require_once $libpath = substr(str_replace('\\', '/', __dir__), 0, -40).'library/initialize.php'; ?>
 <?php  
 	$sql = "SELECT * FROM products ";
 	$sql .= "WHERE category = 'Other'";
