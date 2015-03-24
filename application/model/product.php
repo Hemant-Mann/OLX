@@ -2,19 +2,18 @@
 
 class Product extends DatabaseObject {
 	protected static $table_name = "products";
-	protected static $db_fields = ['id', 'user_id', 'category', 'name', 'price', 'pur_year', 'description', 'filename', 'file_size'];
+	protected static $db_fields = ['id', 'user_id', 'category_id', 'name', 'price', 'pur_year', 'description', 'filename'];
 	public $id;
 	public $user_id;
-	public $category;
+	public $category_id;
 	public $name;
 	public $price;
 	public $pur_year;
 	public $description;
 	public $filename;
-	public $file_size;
 	
 	// To be provided by the user input
-	private $required_fields = ['category', 'name', 'price', 'description'];
+	private $required_fields = ['category_id', 'name', 'price', 'description'];
 	private $temp_path;
 	protected $upload_dir = "products";
 	public $errors = array();
@@ -45,7 +44,6 @@ class Product extends DatabaseObject {
 			// Set object attributes to the form parameter
 			$this->temp_path = $file['tmp_name'];
 			$this->filename = $this->user_id."-".trim($this->name)."-".basename($file['name']);
-			$this->file_size = $file['size'];
 			return true;
 		}
 	}
