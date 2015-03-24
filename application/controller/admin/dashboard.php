@@ -23,6 +23,5 @@
   $products = Product::find_by_field("user_id", $_SESSION['user_id'], ["limit" => $per_page, "offset" => $pagination->offset()]);
   if(!$products) { $products = []; }
 
-  global $categories;
   include($dir_admin.'dashboard.php');
 ?>

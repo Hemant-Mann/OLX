@@ -18,14 +18,15 @@
    
     <div id="display">
     <?php foreach($products as $product){ ?>
+     <?php $cat_name = category_details($product->category_id, NULL); ?>
      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-5">
       <div>
         <p>
-          <span class="visible-lg visible-md visible-sm"><b>Category:</b> <?php echo $categories["{$product->category_id}"]["value"]; ?><br/></span>
+          <span class="visible-lg visible-md visible-sm"><b>Category:</b> <?php echo $cat_name; ?><br/></span>
           <span class="visible-lg visible-md visible-sm visible-xs"><b>Product:</b> <?php echo $product->name; ?><br /></span>
         </p>
     
-        <a class="thumbnail" href="<?php echo ASSETS.$product->image_path(); ?>" title="<?php echo $product->category. ': '.$product->name; ?>" data-gallery>
+        <a class="thumbnail" href="<?php echo ASSETS.$product->image_path(); ?>" title="<?php echo $cat_name.': '.$product->name; ?>" data-gallery>
           <img src="<?php echo ASSETS.$product->image_path(); ?>" width="210" alt="<?php echo $product->name; ?>" />
         </a>  
       </div>

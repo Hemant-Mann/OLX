@@ -24,9 +24,10 @@
           <th>&nbsp;</th>
         </tr>
         <?php foreach($products as $product) { ?>
+        <?php $cat_name = category_details($product->category_id, NULL); ?>
         <tr>
           <td><img src="<?php echo ASSETS.$product->image_path(); ?>" width="120" /></td>
-          <td><?php echo $categories["{$product->category_id}"]["value"]; ?></td>
+          <td><?php echo $cat_name; ?></td>
           <td><?php echo $product->name; ?></td>
           <td><?php echo $product->price; ?></td>
           <td><?php echo $product->description; ?></td>

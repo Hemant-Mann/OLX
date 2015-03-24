@@ -13,7 +13,6 @@
 
   $products = Product::find_all(["limit" => $per_page, "offset" => $pagination->offset()]);
   
-  global $categories;
   include($dir_public.'index.php');
 
 ?>
