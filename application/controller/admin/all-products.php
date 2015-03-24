@@ -15,6 +15,7 @@ if (!$session->is_logged_in()) { redirect_to(HOME."login"); }
 
   $products = Product::find_all(["limit" => $per_page, "offset" => $pagination->offset()]);
   
+  global $categories;
   include($dir_admin.'all-products.php');
 
 ?>

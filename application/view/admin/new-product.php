@@ -17,14 +17,11 @@
 		<div id = "form">
 			<form id="newProductForm" action="<?php echo HOME; ?>new-product" enctype="multipart/form-data" method="POST">
 				<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>" />
-				<p>Category:<br /> 
-					<input type="radio" name="category" value="Vehicles" checked /> Vehicles<br />	
-					<input type="radio" name="category" value="Electronics and Computer" /> Electronics and Computer<br />
-					<input type="radio" name="category" value="Mobiles and Tablets" /> Mobiles and Tablet<br />
-					<input type="radio" name="category" value="Clothing and Accessories" /> Clothing and Accessories<br />
-					<input type="radio" name="category" value="Books and CDs" /> Books and CDs<br />
-					<input type="radio" name="category" value="Home and Furniture" /> Home and Furniture<br />
-					<input type="radio" name="category" value="Other"> Other
+				<p>Category:<br />
+				<?php global $categories; ?>
+					<?php foreach($categories as $category) { ?>
+					<input type="radio" name="category_id" value="<?php echo $category["id"]; ?>"  /> <?php echo $category["value"]; ?><br />	
+					<?php } ?>
 				</p>
 				
 				<p>Name: <input id="productName" class="form-control" type="text" required maxlength="50" name="name" value="<?php echo $name; ?>" />	

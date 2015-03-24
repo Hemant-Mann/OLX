@@ -22,5 +22,6 @@
   	redirect_to(HOME);
   }
 
+  global $categories;
   include($dir_public.'search.php');
 ?>

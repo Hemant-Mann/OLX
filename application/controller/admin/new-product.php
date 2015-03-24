@@ -3,39 +3,24 @@
 
 if (!$session->is_logged_in()) { redirect_to(HOME."login"); } ?>
 <?php
-	// Max file size is 5 MB
-	$max_file_size = 5242880;   // expressed in bytes
-	                            //     10240 =  10 KB
-	                            //    102400 = 100 KB
-	                            //   1048576 =   1 MB
-	                            //  10485760 =  10 MB
+	// Max file size is 1 MB
+	$max_file_size = 1048576;  
 
-	if(isset($_POST['submit'])) {
-		$name = $_POST['name'];
-		$price = $_POST['price'];
-		$pur_year = $_POST['pur_year'];
-		$description = $_POST['description'];
-		
+	if(isset($_POST['submit'])) {		
 		// Instantiate a new product
 		$product = new Product();
 		$product->user_id = $_SESSION["user_id"];
-		$product->name = $name;
-		$product->price = $price;
-		
-		if(isset($_POST['category'])) {
-			$category = $_POST['category'];
-			$product->category = $category;
-		} else {
-			$product->category = "";
-		}
+		$product->name = $name = $_POST['name'];
+		$product->price = $price = $_POST['price'];
+		$product->category_id = $category_id = $_POST['category_id'];
 		
 		if(isset($_POST['pur_year'])) {
-			$product->pur_year = $pur_year;
+			$product->pur_year = $pur_year = $_POST['pur_year'];
 		} else {
 			$product->pur_year = 0;
 		}
 		
-		$product->description = $description;
+		$product->description = $description = $_POST['description'];
 		$product->attach_file($_FILES['file_upload']);
 		
 		if($product->save()) {
@@ -47,10 +32,7 @@ if (!$session->is_logged_in()) { redirect_to(HOME."login"); } ?>
 			$message = join("<br />", $product->errors);
 		}
 	} else {
-		$name = "";
-		$price = "";
-		$pur_year = "";
-		$description = "";
+		$name = $price = $pur_year = $description = "";		
 	}	
 	include($dir_admin.'new-product.php');
 ?>

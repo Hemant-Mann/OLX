@@ -26,7 +26,7 @@
         <?php foreach($products as $product) { ?>
         <tr>
           <td><img src="<?php echo ASSETS.$product->image_path(); ?>" width="120" /></td>
-          <td><?php echo $product->category; ?></td>
+          <td><?php echo $categories["{$product->category_id}"]["value"]; ?></td>
           <td><?php echo $product->name; ?></td>
           <td><?php echo $product->price; ?></td>
           <td><?php echo $product->description; ?></td>
