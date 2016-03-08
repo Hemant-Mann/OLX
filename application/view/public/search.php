@@ -8,7 +8,7 @@
     			<span class="visible-lg visible-md visible-sm visible-xs"><b>Product:</b> <?php echo $product->name; ?><br /></span>
         </p>
     
-  			<a class="thumbnail" href="<?php echo ASSETS.$product->image_path(); ?>" title="<?php echo $product->category. ': '.$product->name; ?>" data-gallery>
+  			<a class="thumbnail" href="<?php echo ASSETS.$product->image_path(); ?>" title="<?php echo $categories[$product->category_id]["value"] . ': '.$product->name; ?>" data-gallery>
           <img src="<?php echo ASSETS.$product->image_path(); ?>" width="210" alt="<?php echo $product->name; ?>" />
   			</a>	
   		</div>

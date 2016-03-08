@@ -16,7 +16,7 @@ $cat = Categories::find_all();
 $categories = [];
 
 foreach($cat as $obj) {
-	$categories[] = [
+	$categories[$obj->id] = [
 		"id" => "{$obj->id}",
 		"value" => "{$obj->category}"
 	];
